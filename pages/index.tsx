@@ -2,21 +2,14 @@ import type { NextPage } from 'next';
 import Head from 'next/head';
 
 import { prisma } from '../lib/prisma';
+import { trpc } from '../lib/trpc';
 
 const Home: NextPage = (props: any) => {
-  return (
-    <div className="lg:max-w-6xl mx-auto max-h-screen overflow-hidden">
-      <Head>
-        <title>Poll App</title>
-      </Head>
+  const { data, isLoading } = trpc.useQuery(['hello']);
 
-      <main className="grid grid-cols-9">
-        <h1>Hi</h1>
+  if (isLoading || !data) return <div>Loading...</div>;
 
-        <code>{props.questions}</code>
-      </main>
-    </div>
-  );
+  return <div>{data?.greeting}</div>;
 };
 
 export const getServerSideProps = async () => {
