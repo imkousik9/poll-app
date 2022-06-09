@@ -1,6 +1,6 @@
 import { withTRPC } from '@trpc/next';
 import { AppType } from 'next/dist/shared/lib/utils';
-import { AppRouter } from './api/trpc/[trpc]';
+import type { AppRouter } from '../backend/router';
 import superjson from 'superjson';
 
 import '../styles/globals.css';
@@ -31,5 +31,5 @@ export default withTRPC<AppRouter>({
   /**
    * @link https://trpc.io/docs/ssr
    */
-  ssr: true
+  ssr: false
 })(MyApp);
